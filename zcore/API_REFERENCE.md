@@ -7,11 +7,7 @@
 
 - [keys](#keys)
 
-- [mouse](#mouse)
-
 - [obj](#obj)
-
-- [vec2](#vec2)
 
 - [window](#window)
 
@@ -21,7 +17,8 @@
 ## `draw`
 
 
-_no module docstring_
+drawing module, you can also just manualy
+write each function yourself if you want finer control
 
 
 ### Functions
@@ -42,7 +39,7 @@ Args:
 drawCircle(surface: pygame.surface.Surface, color: ColorType, center: tuple[int, int], radius: int) -> None
 ```
 
-_no docstring_
+this draws a circle with no fill
 
 
 ```python
@@ -63,7 +60,7 @@ Args:
 drawRect(screen: pygame.surface.Surface, x: int, y: int, width: int, height: int, color: ColorType) -> None
 ```
 
-_no docstring_
+this is a rectangle made of lines, no fill
 
 
 ```python
@@ -133,28 +130,28 @@ def fib(n):
 cache(fn)
 ```
 
-_no docstring_
+this is useful when you are running on low memory devices, where you can't keep loading the same resource
 
 
 ```python
 memFree(fn)
 ```
 
-_no docstring_
+this decorator forces python's GC to run
 
 
 ```python
 memUsageGet(fn)
 ```
 
-_no docstring_
+this decorator returns the memory used by a function, as well as it's return value
 
 
 ```python
 nonWorking(reason: str = None)
 ```
 
-_no docstring_
+this is just a way we do things internally, since it's easier to ctrl-f it
 
 
 ```python
@@ -172,16 +169,10 @@ keys.py
 This defines keyboard constants that you can use.
 
 
-## `mouse`
-
-
-_no module docstring_
-
-
 ## `obj`
 
 
-_no module docstring_
+a simple script that contains useful classes
 
 
 ### Classes
@@ -189,35 +180,17 @@ _no module docstring_
 
 ### class `SpriteObject`
 
-_no docstring_
+Represents a sprite that can be drawn to the screen.
 
 #### `draw(self, surface: pygame.surface.Surface, x: int, y: int, scaleX: int, scaleY: int)`
 
-_no docstring_
-
-
-## `vec2`
-
-
-_no module docstring_
-
-
-### Classes
-
-
-### class `Vec2`
-
-_no docstring_
-
-#### `copy(self) -> 'Vec2'`
-
-_no docstring_
+this draws the sprite object
 
 
 ## `window`
 
 
-_no module docstring_
+this contains the main loop of the application
 
 
 ### Functions
@@ -227,11 +200,14 @@ _no module docstring_
 createWindow(width: int, height: int, title: str) -> pygame.surface.Surface
 ```
 
-this creates a window,
+this creates a window and returns it
 Args:
     width: the width of the window
     height: the height of the window
     title: the title of the window
+
+Returns:
+    window: a instance of pygame.Surface
 
 
 ```python
@@ -254,7 +230,7 @@ isKeyPressed(key: int) -> bool
 Checks if the key was just pressed
 
 Args:
-    key(str): the name of the key you want to check
+    key: the name of the key you want to check
 
 Returns:
     bool: True if the key was just clicked, False otherwise
@@ -274,4 +250,5 @@ Args:
 quit() -> None
 ```
 
-_no docstring_
+sets running to false
+making the main loop exit

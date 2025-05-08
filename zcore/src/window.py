@@ -1,3 +1,7 @@
+"""
+this contains the main loop of the application
+
+"""
 import pygame
 from typing import Callable
 from time import time
@@ -10,21 +14,25 @@ _running = False
 
 
 def quit() -> None:
-    global _running
     """
     sets running to false
-    and quits the game
+    making the main loop exit
     """
+    global _running
+
     _running = False
 
 
 def createWindow(width: int, height: int, title: str) -> pygame.Surface:
     """
-    this creates a window,
+    this creates a window and returns it
     Args:
         width: the width of the window
         height: the height of the window
         title: the title of the window
+
+    Returns:
+        window: a instance of pygame.Surface
     """
     window: pygame.Surface = pygame.display.set_mode((width, height))
     pygame.display.set_caption(title)
@@ -50,7 +58,7 @@ def isKeyPressed(key: int) -> bool:
     Checks if the key was just pressed
 
     Args:
-        key(str): the name of the key you want to check
+        key: the name of the key you want to check
 
     Returns:
         bool: True if the key was just clicked, False otherwise

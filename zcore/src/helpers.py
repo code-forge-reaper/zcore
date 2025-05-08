@@ -32,6 +32,9 @@ def timeit(fn):
     return wrapper
 
 def cache(fn):
+    """
+    this is useful when you are running on low memory devices, where you can't keep loading the same resource
+    """
     cache_dict = {}
 
     @functools.wraps(fn)
@@ -44,6 +47,9 @@ def cache(fn):
     return wrapper
 
 def nonWorking(reason:str = None):
+    """
+    this is just a way we do things internally, since it's easier to ctrl-f it
+    """
     def wrap(fn):
         def wrapper(*args, **kwargs):
             # Perform some non-working behavior or logic here
@@ -56,6 +62,9 @@ def nonWorking(reason:str = None):
     return wrap
 
 def memFree(fn):
+    """
+    this decorator forces python's GC to run
+    """
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
         result = fn(*args, **kwargs)
@@ -64,11 +73,15 @@ def memFree(fn):
     return wrapper
 
 def memUsageGet(fn):
+    """
+    this decorator returns the memory used by a function, as well as it's return value
+    """
     @functools.wraps(fn)
     def wrapper(*args, **kwargs):
-        usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        before = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
         result = fn(*args, **kwargs)
-        return result, usage
+        usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        return result, usage - before
     return wrapper
 
 if __name__ == "__main__":

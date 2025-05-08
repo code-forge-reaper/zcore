@@ -9,10 +9,24 @@ if you want to generate the [API_REFERENCE](API_REFERENCE.md) for the latest zco
 ## example game
 ```py
 from pygame.math import Vector2
-import zcore, random
+import zcore, random, pygame
 from zcore.src.draw import drawText
+from zcore.src.helpers import cache
 
 win = zcore.window.createWindow(800,600,"outpost: null")
+
+# this automatically makes the function more memory efficient
+# as in:
+# 	it stores the result that was returned, using the arguments as the key
+#	if it can actualy find the arguments, it returns the value that was stored
+# 	otherwise it runs the function and stores the result
+@cache
+def loadImage(path:str) -> pygame.Surface:
+	print(f"loading: {path}")
+	return pygame.image.load(path)
+
+background = loadImage("image.jpg")
+background = loadImage("image.jpg")# won't be re-executed, but will get the value from the first call
 
 player = Vector2()
 coin = Vector2(
@@ -43,6 +57,7 @@ def move(dt: float) -> None:
 def main(dt: float):
 	move(dt)
 	zcore.draw.clearBackground(win,"black")
+	win.blit(background, (0,0))
 	zcore.draw.fillCircle(win, "blue", coin,10)
 	zcore.draw.fillRect(win, int(player.x),int(player.y), 20,20,"red")
 	drawText(win, f"{points = }", 20,20,20,"red")

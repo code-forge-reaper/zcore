@@ -1,3 +1,8 @@
+"""
+drawing module, you can also just manualy
+write each function yourself if you want finer control
+"""
+
 import pygame
 
 type ColorType = tuple[int, int, int, int] | pygame.Color | str
@@ -90,11 +95,16 @@ def drawText(
 def drawRect(
     screen: pygame.Surface, x: int, y: int, width: int, height: int, color: ColorType
 ) -> None:
-    # this is a rectangle made of lines, no fill
+    """
+    this is a rectangle made of lines, no fill
+    """
     pygame.draw.rect(screen, color, (x, y, width, height), 1)
 
 
 def drawCircle(
     surface: pygame.Surface, color: ColorType, center: tuple[int, int], radius: int
 ) -> None:
+    """
+    this draws a circle with no fill
+    """
     pygame.draw.circle(surface, color, center, radius, 1)
