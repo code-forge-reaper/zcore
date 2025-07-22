@@ -1,0 +1,55 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual envs
+.venv/
+env/
+venv/
+.uv/
+
+# Python distribution stuff
+build/
+dist/
+*.egg-info/
+
+# IDE/editor config
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Pygame temp/saves/screenshots
+*.log
+*.bmp
+*.png
+*.jpg
+*.jpeg
+*.tga
+*.wav
+*.ogg
+
+# PyInstaller
+*.spec
+
+# Lock files (optional)
+poetry.lock
+Pipfile.lock
+
+# C extensions (if you ever compile C stuff)
+*.so
+*.dll
+*.dylib
+
+# Testing
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache/
+pytest_cache/
