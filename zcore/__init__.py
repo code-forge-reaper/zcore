@@ -1,11 +1,12 @@
 # auto-hooks itself
 from . import zen
 
-from .src import window
-from .src import draw
-from .src import keys
+from . import window
+from . import draw
+from . import keys
+from . import mouse
 
-from .src import obj
+from . import obj
 
 __all__ = [
     "window",
