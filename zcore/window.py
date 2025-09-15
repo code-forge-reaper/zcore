@@ -69,25 +69,33 @@ def isKeyPressed(key: int) -> bool:
 
     # Return True if current state is True and last state is False (key was just pressed)
     return current_state and not last_state
+_frameRate = 0
+def getFPS() -> float:
+    """
+    Returns the current FPS.
+    """
+    return _frameRate
 
-
-def mainLoop(gameLoop: Callable):
+def mainLoop(gameLoop: Callable, fps: int = 0):
     """
     Main loop for the game.
 
     Args:
         gameLoop: A callable that represents the game loop, which takes the delta time as an argument.
+        fps: Optional. Max frames per second. 0 = uncapped.
     """
-    # Main loop
+    global _running, _frameRate
+    _running = True
     dt = 0.1
     lastTime = time()
-    global _running
-    _running = True
+    clock = pygame.time.Clock() if fps > 0 else None
+    # TODO: track fps better
     while _running:
-        # Handle events
+        # Calculate delta time
         dt = time() - lastTime
         lastTime = time()
 
+        # Handle events
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 _running = False
@@ -102,4 +110,8 @@ def mainLoop(gameLoop: Callable):
 
         pygame.display.flip()
 
-    pygame.quit()
+        # Cap FPS if requested
+        if clock:
+            clock.tick(fps)
+        _frameRate = 1.0 / dt if dt > 0 else 0
+

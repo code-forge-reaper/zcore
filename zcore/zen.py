@@ -1,3 +1,28 @@
+"""
+this module is a autohook error handler that provides context clues around the erronous area
+
+Usage:
+    simply import this module and it will handle the hook itself
+    by using sys.excepthook
+
+
+Example error:
+2025-09-12 12:35:41
+/home/cross/projects/ark/zcore/zen.py caugth a unhandled exception
+Exception: ZeroDivisionError: division by zero
+  Line: 80
+  File: zen.py
+  Code:
+    print(1 / 0)
+  Context:
+
+if __name__ == "__main__":
+    # To test the error message
+    print(1 / 0)
+
+
+"""
+
 import sys
 import os
 import traceback
@@ -5,6 +30,12 @@ import time
 
 
 def excepthook(exctype, value, tb):
+    """
+    this is a autohook,
+    it will print a concise error message
+    with information around the error
+    """
+
     # Extract the traceback summary
     tb_summary = traceback.extract_tb(tb)
 
@@ -56,10 +87,16 @@ def excepthook(exctype, value, tb):
 
 
 def indent_code(code):
+    """
+    Indent a code block
+    """
     return "\n".join(["\t" + line for line in code.split("\n")])
 
 
 def safeEval(code="", functions={}, variables={}):
+    """
+    Evaluate a code block with a pre-defined set of functions and variables
+    """
     exec(code, functions, variables)
 
 
